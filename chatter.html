@@ -9,15 +9,15 @@
 	<script src="handlebars.js"></script>
   </head>
   <body>
-	<div id="content">
-		<div class="slds-form-element">
-		  <label class="slds-form-element__label" for="text-input-01">Input Label</label>
-		  <div class="slds-form-element__control">
-		    <input type="text" id="text-input-01" class="slds-input" placeholder="Placeholder Text" />
-		  </div>
-		  <button class="slds-button slds-utility-bar__action" id="submitChatter">Submit</button>
+		<div class="slds-form--stacked" style="margin: 5px;">
+			<div class="slds-form-element">
+			  <label class="slds-form-element__label" for="text-input-01">Chatter Post</label>
+			  <div class="slds-form-element__control">
+			    <input type="text" id="text-input-01" class="slds-input"  style="margin: 5px;" placeholder="Chatter Details" />
+			  </div>
+			  <button class="slds-button slds-button--neutral slds-not-selected" ><a href="explorer.html">Cancel</a></button>
+			  <button class="slds-button slds-button--neutral slds-not-selected" id="submitChatter">Submit</button>
+			</div>
 		</div>
-		<button class="slds-button slds-button--neutral slds-not-selected"><a href="explorer.html">Back</a></button>
-	</div>
   </body>
 </html>
