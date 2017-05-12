@@ -58,7 +58,7 @@ function docReady() {
 			if(typeof(error)!='undefined') {
 				alert(error);
 			}
-			var _postChatterURL = sfdcAuth.get('instance_url') +"/services/data/v39.0/chatter/feed-elements?feedElementType=FeedItem&subjectId=a079A000000OlRLQA0&text="+$("#text-input-01").val();
+			var _postChatterURL = sfdcAuth.get('instance_url') +"/services/data/v39.0/chatter/feed-elements?feedElementType=FeedItem&subjectId="+getParameterByName('item')+"&text="+$("#text-input-01").val();
 			$.ajax({
 				url: _postChatterURL,
 				cache: false,
@@ -68,6 +68,7 @@ function docReady() {
 				//data: data,
 				success:  function(data){
 					console.log(data);
+					window.location.href = 'explorer.html';
 				}
 			});
 		});
