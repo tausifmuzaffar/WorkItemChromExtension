@@ -29,7 +29,20 @@ function docReady() {
 						"WHERE Assignee__c = '005B00000018XXj' AND Status__c <> 'Closed' " +
 						"LIMIT 100";
 		var _data_service_url = sfdcAuth.get('instance_url') +"/services/data/v26.0/query/?q=" + soqlWork;
-		var _chatterURL = sfdcAuth.get('instance_url') +"/services/data/v39.0/chatter/feeds/record/a07B0000002bpVVIAY/feed-elements";
+		var _getChatterURL = sfdcAuth.get('instance_url') +"/services/data/v39.0/chatter/feeds/record/"+getParameterByName('item')+"/feed-elements";
+
+		$.ajax({
+				url: _getChatterURL,
+				cache: false,
+				type: 'GET',
+				dataType: 'json',
+				headers: {'Authorization': 'OAuth ' + sfdcAuth.getAccessToken()},
+				//data: data,
+				success:  function(data){
+					console.log(data.elements[0].body.text);
+					$('#recent').text(data.elements[0].body.text);
+				}
+			});
 
 		$.ajax({
 			url: _data_service_url,
@@ -39,11 +52,28 @@ function docReady() {
 			headers: {'Authorization': 'OAuth ' + sfdcAuth.getAccessToken()},
 			//data: data,
 			success:  function(data){
-				console.log(data);
-				var source   = $("#workrecord-list-template").html();
-				t_accounts = Handlebars.compile(source);
-				var html = t_accounts(data);
-				$("#content").append(html);
+				var _gitPulls = "https://api.github.com/repos/tausifmuzaffar/WorkItemChromExtension/pulls?state=all";
+				$.ajax({
+					url: _gitPulls,
+					cache: false,
+					type: 'GET',
+					dataType: 'json',
+					success:  function(gits){
+						for(var i=0; i<gits.length; i++){
+							for(var j=0; j<data.records.length; j++){
+								if(gits[i].title === data.records[j].Name){
+									data.records[j].git = gits[i].html_url;
+									data.records[j].gitState = gits[i].state;
+								}
+							}
+						}
+						var source   = $("#workrecord-list-template").html();
+						t_accounts = Handlebars.compile(source);
+						var html = t_accounts(data);
+						$("#content").append(html);
+						console.log(data);
+					}
+				});
 			}
 		});
 	});
