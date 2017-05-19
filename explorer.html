@@ -60,6 +60,13 @@
 		        <a href="chrome-extension://nefbojdjimfopaijdinenmbcedcfhfkl/chatter.html?item={{Id}}"><img src="/slds/assets/icons/utility/share_post_60.png" width="17" height="17"></a>
 		      </td>
 		    </tr>
+		    {{#if git}}
+			  <tr>
+			  	<td colspan="1"><img src="GitHub.png" width="50" height="50"></td>
+			  	<td colspan="3"><a href="{{git}}" target="_blank">{{git}}</a></td>
+			  	<td colspan="2">{{gitState}}</td>
+			  </tr>
+			{{/if}}
 		    {{/each}}
 		  </tbody>
 		</table>

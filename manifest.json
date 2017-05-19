@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
 
-  "name": "Force.com SOQL Explorer ",
+  "name": "Work Item Management",
   "description": "Execute Force.com SOQL queries right from your browser",
   "version": "1.0",
   "content_scripts": [
